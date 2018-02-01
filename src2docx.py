@@ -64,10 +64,22 @@ def eachFile(filePath, document):
 document = Document()
 
 document.add_heading('source code'.decode('utf-8'), 0)
-eachFile('/Users/heapow/projects/YZHApp', document)
-print lines
+if(len(sys.argv) < 3):
+	print 'Without src path and output path'
+else:
+	if(os.path.exists(sys.argv[1])):
+		if(not os.path.exists(sys.argv[2])):
+			eachFile(sys.argv[1], document)
+			document.save(sys.argv[2])
 
-document.save('demo.docx')
+			print 'Merge all the files in ' + sys.argv[1] + ' to ' + sys.argv[2] + ' success'
+			print 'All source are ' + str(lines) + ' lines'
+
+		else:
+			print sys.argv[2] + 'has exist'
+	else:
+		print sys.argv[1] + ' not exist'
+
 
 
 
