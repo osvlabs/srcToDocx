@@ -3,8 +3,11 @@ import os
 from docx import Document
 from docx.shared import Inches
 import sys
-lines=0
+from IgnoreArray import IgnoreArray
 
+lines=0
+ignoreArr = IgnoreArray()
+#print ignoreArr
 def eachFile(filePath, document):
 		global lines
 		if (os.path.isfile(filePath)):
@@ -29,37 +32,7 @@ def eachFile(filePath, document):
 		else:
 			files = os.listdir(filePath)
 			for f in files:
-				if(f == 'node_modules'): continue
-				if(f == '.git'): continue
-				if(f == '.idea'): continue
-				if(f == 'build'): continue
-				if(f == 'config'): continue
-				if(f == 'dist'): continue
-				if(f == 'assets'): continue
-				if(f == 'static'): continue
-				if(f == '.babelrc'): continue
-				if(f == '.editorconfig'): continue
-				if(f == '.eslintignore'): continue
-				if(f == '.postcssrc.js'): continue
-				if(f == '.eslintrc.js'): continue
-				if(f == '.gitignore'): continue
-				if(f == '.package-lock.json'): continue
-				if(f == 'README.md'): continue
-				if(f == 'upload.php'): continue
-				if(f == 'yarn-error.log'): continue
-				if(f == 'yarn.lock'): continue
-				if(f == '.DS_Store'): continue
-				if(f == '__test__'): continue
-				if(f == 'assets'): continue
-				if(f == 'yzh.sublime-project'): continue
-				if(f == 'area.json'): continue
-				if(f == '.buckconfig'): continue
-				if(f == '.flowconfig'): continue
-				if(f == '.gitattributes'): continue
-				if(f == '.watchmanconfig'): continue
-				if(f == '.gradle'): continue
-				if(f == 'android'): continue
-				if(f == 'ios'): continue
+				if(f in ignoreArr): continue
 				eachFile(filePath + '/' + f, document)
 document = Document()
 
