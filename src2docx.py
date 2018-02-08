@@ -4,6 +4,7 @@ from docx import Document
 from docx.shared import Inches
 import sys
 from IgnoreArray import IgnoreArray
+from ExtDetector import is_img
 
 lines=0
 ignoreArr = IgnoreArray()
@@ -13,6 +14,9 @@ def eachFile(filePath, document):
 		if (os.path.isfile(filePath)):
 			(path, name) = os.path.split(filePath)
 			document.add_heading(name, 1)
+			if is_img(filePath):
+				document.add_picture(filePath, width=Inches(1.25))
+				return
 			p=document.add_paragraph('')
 			fopen =open(filePath, 'r')
 			for line in fopen:
